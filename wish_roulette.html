@@ -115,7 +115,7 @@
   </style>
 </head>
 <body>
-  <audio id="bgm" src="/mnt/data/bgm.mp3" loop autoplay></audio>
+  <audio id="bgm" src="/mnt/data/bcm.m4a" loop autoplay></audio>
   <button id="bgm-btn">🔊</button>
 
   <div id="start-screen">
@@ -146,115 +146,6 @@
         bgm.pause();
         bgmBtn.textContent = '🔇';
       }
-    });
-
-    const aChoices = ["서브웨이","올리브영","돈키호테","봉구스밥버거","와플대학","이니스프리","에뛰드하우스","롯데시네마","교보문고","유니클로","무신사","ABC마트","아디다스","나이키","코인노래방","보드게임카페","하이디라오","KMS"];
-    const bChoices = ["시온","리쿠","유우시","사쿠야","재희","료"];
-    const bImages = {
-      "시온": "https://phinf.wevpstatic.net/MjAyNDA0MDhfMTc3/MDAxNzEyNTY4MDIzOTg2.ODBKkcTGyG_XSQfwA9PlWEfn6YV1SnUfOAliMmpmgH4g.sgUTiLKcLpxMvX7Q2KP3C27f5NErURZt7qt0eicYia4g.JPEG/image.jpg",
-      "리쿠": "https://pbs.twimg.com/media/GqR8MiBa4AAFiZe?format=jpg&name=large",
-      "유우시": "https://pbs.twimg.com/media/GReU-P2aYAA-R8S?format=jpg&name=large",
-      "사쿠야": "https://pbs.twimg.com/media/GtysQwkaUAA5Ymh?format=jpg&name=large",
-      "재희": "https://pbs.twimg.com/media/Gt5TZNKbQAAaDX6?format=jpg&name=large",
-      "료": "https://phinf.wevpstatic.net/MjAyMzExMDhfMjk4/MDAxNjk5NDQ2MDkzNDEy.TnigTmUmEPtgehZA6WN4mPyAXhAk-I2XEkRazt1IvIgg.-6LWYMnqzZNYRcxNQ8ZPQzog8AY7Dc8A3VRIGHCz9Ogg.JPEG/image.jpg?type=w670"
-    };
-    const cChoices = ["나가주실래요?","저 곧 퇴근하는데…","제 스타일이어서 그런데 혹시 번호좀…","제 스타일 아니어서 그런데 나가주세요","뽀뽀할래요?","저랑 같이 나갈래요?","죄송한데 비켜주세요","영업 마감했습니다.","저 좀 설레도 돼요?","애기야 이리와 ㅋㅋ","오늘만 남자친구인 건 싫어","천만원만 주세요","누군 땅 파서 장사하나? 돈을 빌렸으면 갚아야지","예쁘니까 서비스 ㅋㅋ","오빠 늑대야","오빠 빼고 남잔 다 늑대야","취했나보다… 그거 내 이름 아닌데","너한테 올인한다","헤어지자"];
-
-    const startBtn = document.getElementById('start-btn');
-    const startScreen = document.getElementById('start-screen');
-    const loadingScreen = document.getElementById('loading-screen');
-    const resultScreen = document.getElementById('result-screen');
-    const loadingText = document.getElementById('loading-text');
-    const retryBtn = document.getElementById('retry-btn');
-
-    function createHearts() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
-      heart.innerHTML = '❤︎';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-
-    function typeEffectLoop(text, repeat, callback) {
-      let count = 0;
-      function typeOnce(done) {
-        let i = 0;
-        loadingText.innerHTML = '';
-        const interval = setInterval(() => {
-          loadingText.innerHTML = text.substring(0, i+1);
-          i++;
-          if (i === text.length) {
-            clearInterval(interval);
-            done();
-          }
-        }, 100);
-      }
-      function loop() {
-        typeOnce(() => {
-          count++;
-          if (count < repeat) {
-            setTimeout(loop, 200);
-          } else {
-            callback();
-          }
-        });
-      }
-      loop();
-    }
-
-    startBtn.addEventListener('click', () => {
-      startScreen.classList.add('hidden');
-      loadingScreen.classList.remove('hidden');
-      typeEffectLoop('당신의 운명은...', 2, () => {
-        loadingText.innerHTML = '<span style="font-size:3rem; color:#ff3366; display:inline-block; animation:heartbeat 0.5s infinite;">운명선정완재희❤︎</span>';
-        setTimeout(() => {
-          loadingScreen.classList.add('hidden');
-          showRoulette();
-        }, 2000);
-      });
-    });
-
-    function showRoulette() {
-      resultScreen.classList.remove('hidden');
-      setInterval(createHearts, 400);
-
-      const rouletteA = document.getElementById('rouletteA');
-      const rouletteB = document.getElementById('rouletteB');
-      const rouletteC = document.getElementById('rouletteC');
-      const bImage = document.getElementById('bImage');
-
-      const a = aChoices[Math.floor(Math.random() * aChoices.length)];
-      const b = bChoices[Math.floor(Math.random() * bChoices.length)];
-      const c = cChoices[Math.floor(Math.random() * cChoices.length)];
-
-      rouletteA.textContent = '';
-      rouletteB.textContent = '';
-      rouletteC.textContent = '';
-
-      setTimeout(() => {
-        rouletteA.innerHTML = `<div style='animation:fadeIn 1s;'>${a}에서 일하는</div>`;
-      }, 1500);
-      setTimeout(() => {
-        bImage.src = bImages[b];
-        bImage.onerror = () => bImage.classList.add('hidden');
-        bImage.classList.remove('hidden');
-        const sentence = b === "시온" ? `${b}이가 하는 말은?` : `${b}가 하는 말은?`;
-        rouletteB.innerHTML = `<div style='animation:fadeIn 1s;'>${sentence}</div>`;
-      }, 3000);
-      setTimeout(() => {
-        rouletteC.innerHTML = `<div style='animation:fadeIn 1.2s;'>\"${c}\"</div>`;
-        setTimeout(() => {
-          retryBtn.classList.remove('hidden');
-        }, 5000);
-      }, 4500);
-    }
-
-    retryBtn.addEventListener('click', () => {
-      resultScreen.classList.add('hidden');
-      retryBtn.classList.add('hidden');
-      startScreen.classList.remove('hidden');
     });
   </script>
 </body>
