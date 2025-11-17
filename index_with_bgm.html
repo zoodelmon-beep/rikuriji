@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>당신의 위시를 골라보시온</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #ffecf4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #ff5d8f;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>💗 당신의 위시를 골라보시온 💗</h1>
+  <audio id="bgm" src="bcm.m4a" autoplay loop></audio>
+  <p>배경음악이 자동으로 재생되지 않으면 위의 ▶️ 버튼을 눌러주세요.</p>
+</body>
+</html>
